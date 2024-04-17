@@ -1,14 +1,12 @@
-package BussinesLogic;
+package BusinessLogic;
 
 import Model.Server;
 import Model.Task;
 
-import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Scheduler {
-    private CopyOnWriteArrayList<Server> servers;
+    private final CopyOnWriteArrayList<Server> servers;
     private int maxNoServers;
     private int maxTasksPerServer;
     private Strategy strategy;
@@ -36,7 +34,6 @@ public class Scheduler {
     }
 
     public void dispatchTask(Task task) {
-        //System.out.println("aici1");
         strategy.addTask(this.servers, task);
     }
 

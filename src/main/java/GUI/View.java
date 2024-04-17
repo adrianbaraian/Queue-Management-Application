@@ -1,7 +1,5 @@
 package GUI;
 
-import BussinesLogic.SimulationManager;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -29,6 +27,7 @@ public class View extends JFrame {
 
     private JButton executeButton;
     private JButton validateButton;
+    private JLabel errorLabel;
     private JTextArea loggerAreaQueues;
     private JTextArea loggerAreaWaiting;
     Controller controller = new Controller(this);
@@ -40,7 +39,7 @@ public class View extends JFrame {
     void prepareGUI() {
         this.setSize(1366, 800);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.contentPane = new JPanel(new GridLayout(1, 3));
+        this.contentPane = new JPanel(new GridLayout(1, 2));
         this.contentPane.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
         this.prepareInputPanel();
         this.prepareLogPanel();
@@ -139,23 +138,25 @@ public class View extends JFrame {
 
         this.inputPanel.add(tempPanel6);
 
-        /*JPanel tempPanel7 = new JPanel();
+        JPanel tempPanel7 = new JPanel();
         tempPanel7.setLayout(new GridLayout(2, 1));
 
-        this.validateButton = new JButton("Validate");
+        /*this.validateButton = new JButton("Validate");
         this.validateButton.setActionCommand("VALIDATE");
         this.validateButton.addActionListener(this.controller);*/
 
+        this.errorLabel = new JLabel("Error! Invalid input! Please make sure all fields are filled in correctly.");
+        this.errorLabel.setVisible(false);
         this.executeButton = new JButton("Execute");
         this.executeButton.setActionCommand("EXECUTE");
         this.executeButton.addActionListener(this.controller);
 
-        /*tempPanel7.add(validateButton);
+        tempPanel7.add(errorLabel);
         tempPanel7.add(executeButton);
 
-        this.inputPanel.add(tempPanel7);*/
+        this.inputPanel.add(tempPanel7);
 
-        this.inputPanel.add(executeButton);
+        //this.inputPanel.add(executeButton);
 
 
 //        this.executeButton.setEnabled(false);
@@ -181,7 +182,7 @@ public class View extends JFrame {
         this.loggerAreaWaiting.setText(loggerWaiting);
     }
 
-    public static void createResultsFrame(float averageWaitingTime, float averageServiceTime, int peakHour) {
+    public void createResultsFrame(float averageWaitingTime, float averageServiceTime, int peakHour) {
         JFrame newFrame = new JFrame("Simulation result");
         newFrame.setSize(500, 500);
         newFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -234,7 +235,7 @@ public class View extends JFrame {
         return strategyComboBox;
     }
 
-    public JButton getExecuteButton() {
-        return executeButton;
+    public JLabel getErrorLabel() {
+        return errorLabel;
     }
 }

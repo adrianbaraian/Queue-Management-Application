@@ -1,0 +1,177 @@
+Initial Clients: { 3, 5, 3 } { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 0
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 3, 5, 3 } { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 1
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 3, 5, 3 } { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 2
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 3, 5, 3 } { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 3
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 3, 5, 3 } { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 4
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 3, 5, 3 } { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 5
+
+Queue 0: { 3, 5, 3 } 
+Queue 1: 
+
+
+Remaining Clients: { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 6
+
+Queue 0: { 3, 5, 2 } 
+Queue 1: 
+
+
+Remaining Clients: { 1, 7, 3 } { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 7
+
+Queue 0: { 3, 5, 1 } 
+Queue 1: { 1, 7, 3 } 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 8
+
+Queue 0: 
+Queue 1: { 1, 7, 2 } 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 9
+
+Queue 0: 
+Queue 1: { 1, 7, 1 } 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 10
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 11
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 12
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 13
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 14
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 15
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 16
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: { 2, 17, 3 } { 4, 17, 2 } 
+
+Current Time: 17
+
+Queue 0: { 2, 17, 3 } 
+Queue 1: { 4, 17, 2 } 
+
+
+Remaining Clients: 
+
+Current Time: 18
+
+Queue 0: { 2, 17, 2 } 
+Queue 1: { 4, 17, 1 } 
+
+
+Remaining Clients: 
+
+Current Time: 19
+
+Queue 0: { 2, 17, 1 } 
+Queue 1: 
+
+
+Remaining Clients: 
+
+Current Time: 20
+
+Queue 0: 
+Queue 1: 
+
+
+Remaining Clients: 
+
+Program finished! Finish time: 20
+
+
+
+Average Waiting Time: 0.0
+Average Service Time: 2.75
+Peak Hour: 7

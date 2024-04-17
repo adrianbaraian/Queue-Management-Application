@@ -1,6 +1,6 @@
 package Model;
 
-import BussinesLogic.SimulationManager;
+import BusinessLogic.SimulationManager;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -17,8 +17,8 @@ public class Server implements Runnable{
 
     public void addTask(Task newTask) {
         this.tasks.add(newTask);
-        SimulationManager.setAverageWaitingTime(new AtomicInteger(SimulationManager.getAverageWaitingTime().addAndGet(this.waitingPeriod.get())));
-        SimulationManager.setAverageServiceTime(new AtomicInteger(SimulationManager.getAverageServiceTime().addAndGet(newTask.getServiceTime())));
+        SimulationManager.setAverageWaitingTime(SimulationManager.getAverageWaitingTime() + this.waitingPeriod.get());
+        SimulationManager.setAverageServiceTime(SimulationManager.getAverageServiceTime() + newTask.getServiceTime());
         this.waitingPeriod.addAndGet(newTask.getServiceTime());
 
     }
@@ -29,7 +29,7 @@ public class Server implements Runnable{
             if(!tasks.isEmpty()) {
                 Task currentTask = tasks.peek();
                 try {
-                    Thread.sleep(currentTask.getServiceTime() * 1000);
+                    Thread.sleep(currentTask.getServiceTime() * 1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

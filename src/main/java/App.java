@@ -1,4 +1,3 @@
-import BussinesLogic.SimulationManager;
 import GUI.View;
 
 public class App {

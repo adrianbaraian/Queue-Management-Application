@@ -1,4 +1,4 @@
-package BussinesLogic;
+package BusinessLogic;
 
 import GUI.View;
 import Model.Server;
@@ -9,31 +9,30 @@ import java.io.IOException;
 import java.util.Comparator;
 
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class SimulationManager implements Runnable{
     //for testing
-    private static AtomicInteger averageWaitingTime;
-    private static AtomicInteger averageServiceTime;
-    private static AtomicInteger peakHour;
+    private static int averageWaitingTime;
+    private static int averageServiceTime;
+    private static int peakHour;
     public int peakHourNrClients = -1;
-    private int timeLimit;
-    private int maxProcessingTime;
-    private int minProcessingTime;
-    private int minArrivalTime;
+    private final int timeLimit;
+    private final int maxProcessingTime;
+    private final int minProcessingTime;
+    private final int minArrivalTime;
 
-    private int maxArrivalTime;
-    private int numberOfServers;
-    private int numberOfClients;
+    private final int maxArrivalTime;
+    private final int numberOfServers;
+    private final int numberOfClients;
     private SelectionPolicy selectionPolicy;
 
-    private Scheduler scheduler;
+    private final Scheduler scheduler;
     private View view;
-    private CopyOnWriteArrayList<Task> tasks;
+    private final CopyOnWriteArrayList<Task> tasks;
     public SimulationManager(int timeLimit, int maxProcessingTime, int minProcessingTime, int minArrivalTime, int maxArrivalTime, int numberOfServers, int numberOfClients, View view) {
-        averageWaitingTime = new AtomicInteger(0);
-        averageServiceTime = new AtomicInteger(0);
-        peakHour = new AtomicInteger(0);
+        averageWaitingTime = 0;
+        averageServiceTime = 0;
+        peakHour = 0;
 
         this.timeLimit = timeLimit;
         this.maxProcessingTime = maxProcessingTime;
@@ -58,10 +57,6 @@ public class SimulationManager implements Runnable{
         }
 
         this.tasks.sort(Comparator.comparingInt(Task::getArrivalTime));
-
-        for (Task task : tasks) {
-            System.out.println("{ " + task.getID() + ", " + task.getArrivalTime() + ", " + task.getServiceTime() + " }");
-        }
     }
 
     @Override
@@ -83,8 +78,7 @@ public class SimulationManager implements Runnable{
             fw.write("Initial Clients: " + loggerWaiting + "\n\n");
             view.updateView(loggerQueues, loggerWaiting);
 
-            boolean waitingLineEmpty = false;
-            boolean allQueuesEmpty = true;
+            boolean allQueuesEmpty;
 
             while(currentTime < timeLimit) {
                 loggerQueues = "";
@@ -118,7 +112,7 @@ public class SimulationManager implements Runnable{
 
                 if(currentHourNrClients > peakHourNrClients) {
                     peakHourNrClients = currentHourNrClients;
-                    peakHour.set(currentTime);
+                    peakHour = currentTime;
                 }
 
                 view.updateView(loggerQueues, loggerWaiting);
@@ -126,7 +120,6 @@ public class SimulationManager implements Runnable{
                 fw.write(loggerQueues + "\n\nRemaining Clients: " + loggerWaiting + "\n\n");
 
                 if(tasks.isEmpty()) {
-                    waitingLineEmpty = true;
                     allQueuesEmpty = true;
                     for(Server server : scheduler.getServers()) {
                         if (!server.getTasks().isEmpty()) {
@@ -135,7 +128,7 @@ public class SimulationManager implements Runnable{
                         }
                     }
 
-                    if(waitingLineEmpty && allQueuesEmpty) {
+                    if(allQueuesEmpty) {
                         break;
                     }
                 }
@@ -155,11 +148,11 @@ public class SimulationManager implements Runnable{
             view.updateView(loggerQueues, loggerWaiting);
 
             fw.write(loggerQueues + "\n\n" + "\n\n");
-            fw.write("Average Waiting Time: " + (float)(averageWaitingTime.get() / (float)numberOfClients) + "\n");
-            fw.write("Average Service Time: " + (float)(averageServiceTime.get() / (float)numberOfClients) + "\n");
-            fw.write("Peak Hour: " + peakHour.get() + "\n");
+            fw.write("Average Waiting Time: " + (averageWaitingTime / (float)numberOfClients) + "\n");
+            fw.write("Average Service Time: " + (averageServiceTime / (float)numberOfClients) + "\n");
+            fw.write("Peak Hour: " + peakHour + "\n");
 
-            View.createResultsFrame((float)(averageWaitingTime.get() / (float)numberOfClients), (float)(averageServiceTime.get() / (float)numberOfClients), peakHour.get());
+            this.view.createResultsFrame(averageWaitingTime / (float)numberOfClients, averageServiceTime / (float)numberOfClients, peakHour);
 
 
             fw.close();
@@ -169,28 +162,20 @@ public class SimulationManager implements Runnable{
 
         }
 
-    public static AtomicInteger getAverageWaitingTime() {
+    public static int getAverageWaitingTime() {
         return averageWaitingTime;
     }
 
-    public static void setAverageWaitingTime(AtomicInteger averageWaitingTime) {
+    public static void setAverageWaitingTime(int averageWaitingTime) {
         SimulationManager.averageWaitingTime = averageWaitingTime;
     }
 
-    public static AtomicInteger getAverageServiceTime() {
+    public static int getAverageServiceTime() {
         return averageServiceTime;
     }
 
-    public static void setAverageServiceTime(AtomicInteger averageServiceTime) {
+    public static void setAverageServiceTime(int averageServiceTime) {
         SimulationManager.averageServiceTime = averageServiceTime;
-    }
-
-    public static AtomicInteger getPeakHour() {
-        return peakHour;
-    }
-
-    public static void setPeakHour(AtomicInteger peakHour) {
-        SimulationManager.peakHour = peakHour;
     }
 
     public void setView(View view) {

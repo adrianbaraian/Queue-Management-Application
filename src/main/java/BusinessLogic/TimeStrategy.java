@@ -1,10 +1,8 @@
-package BussinesLogic;
+package BusinessLogic;
 
 import Model.Server;
 import Model.Task;
 
-import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TimeStrategy implements Strategy{
