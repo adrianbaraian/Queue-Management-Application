@@ -172,8 +172,16 @@ public class View extends JFrame {
         this.loggerAreaQueues = new JTextArea();
         this.loggerAreaWaiting = new JTextArea();
 
-        this.logPanel.add(this.loggerAreaQueues);
-        this.logPanel.add(this.loggerAreaWaiting);
+        this.loggerAreaQueues.setLineWrap(true);
+        this.loggerAreaWaiting.setLineWrap(true);
+        this.loggerAreaQueues.setWrapStyleWord(true);
+        this.loggerAreaWaiting.setWrapStyleWord(true);
+
+        JScrollPane jScrollPane1 = new JScrollPane(this.loggerAreaQueues);
+        JScrollPane jScrollPane2 = new JScrollPane(this.loggerAreaWaiting);
+
+        this.logPanel.add(jScrollPane1);
+        this.logPanel.add(jScrollPane2);
         this.contentPane.add(logPanel);
     }
 
